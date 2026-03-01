@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delicious Bites | Hyderabad</title>
+    <!-- Font Awesome for icons (professional touch) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientFlow 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* semi-transparent overlay for readability */
+        .page-wrapper {
+            background-color: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(3px);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== NAVIGATION BAR (home, menu, contact, order) ===== */
+        .navbar {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 1rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.4);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            flex-wrap: wrap;
+        }
+
+        .logo a {
+            color: #ffedc0;
+            font-size: 1.9rem;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 1.5px;
+            text-shadow: 2px 2px 0 #b64516;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 40px;
+            transition: 0.2s;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid transparent;
+        }
+
+        .nav-links a:hover {
+            background: #fc466b;
+            border-color: gold;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #ffb86b;
+        }
+
+        .nav-links a i {
+            margin-right: 8px;
+        }
+
+        /* active link simulation (just for style) */
+        .nav-links a:active { background: #3f5efb; }
+
+        /* ===== HEADER with Hyderabad address ===== */
+        header {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            background: rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(12px);
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        header h1 {
+            font-size: 4.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff8e7, #ffe9b0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            margin-bottom: 0.3rem;
+        }
+
+        .hyderabad-badge {
+            font-size: 1.5rem;
+            color: #ffd966;
+            background: rgba(100, 0, 0, 0.3);
+            display: inline-block;
+            padding: 0.5rem 2rem;
+            border-radius: 60px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,0,0.6);
+            margin-top: 0.5rem;
+        }
+
+        .hyderabad-badge i {
+            margin-right: 10px;
+            color: #ffb347;
+        }
+
+        /* ===== SECTION CARDS (elegant) ===== */
+        section {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            margin: 2.5rem 3rem;
+            padding: 3rem 2rem;
+            border-radius: 3rem;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(255,215,0,0.3) inset;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.8rem;
+            font-weight: 600;
+            margin-bottom: 2.5rem;
+            color: #2c3e50;
+            background: rgba(255,255,255,0.6);
+            padding: 0.5rem 3rem;
+            border-radius: 60px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            backdrop-filter: blur(4px);
+            border: 1px solid gold;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ===== MENU GRID (19 items) ===== */
+        .menu-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .menu-card {
+            width: 240px;
+            background: rgba(255, 250, 240, 0.95);
+            border-radius: 2rem;
+            padding: 1.8rem 1rem 1.5rem;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 20px 30px -8px rgba(0,0,0,0.4);
+            border: 2px solid rgba(255, 184, 77, 0.7);
+        }
+
+        .menu-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-color: #ff8c42;
+            background: #fff9f0;
+        }
+
+        .menu-card img {
+            width: 200px;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 1.5rem;
+            border: 5px solid white;
+            box-shadow: 0 10px 20px #b45f2b;
+        }
+
+        .menu-card p {
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin: 1rem 0 0.5rem;
+            color: #321f0f;
+        }
+
+        .price-tag {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #c4450c;
+            background: #fff0dd;
+            display: inline-block;
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            margin: 0.3rem 0 0.8rem;
+            border: 1px solid #ffb27c;
+        }
+
+        .menu-card input {
+            width: 80px;
+            padding: 0.7rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: 3px solid #ffa559;
+            border-radius: 40px;
+            text-align: center;
+            background: white;
+            transition: 0.2s;
+        }
+
+        .menu-card input:focus {
+            outline: none;
+            border-color: #e03a3a;
+            box-shadow: 0 0 0 4px #fec8c8;
+        }
+
+        /* ===== BOOKING FORM ===== */
+        .booking-panel {
+            max-width: 550px;
+            margin: 2rem auto 1rem;
+            background: #fffaf2;
+            padding: 2.5rem 3rem;
+            border-radius: 3.5rem;
+            box-shadow: 0 20px 40px #7b3f1a, 0 0 0 3px #ffbd71;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-left: 1rem;
+            margin-bottom: 0.4rem;
+            color: #882d00;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem 1.8rem;
+            border: 3px solid #ffb27c;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            background: white;
+        }
+
+        .form-group input:focus {
+            border-color: #d64141;
+            outline: none;
+            box-shadow: 0 0 0 5px #ffc6c6;
+        }
+
+        .confirm-btn {
+            background: linear-gradient(145deg, #ff416c, #ff4f2e);
+            border: none;
+            color: white;
+            font-weight: 700;
+            font-size: 1.8rem;
+            padding: 1.2rem 2rem;
+            width: 100%;
+            border-radius: 60px;
+            cursor: pointer;
+            box-shadow: 0 12px 0 #a5222a, 0 8px 20px black;
+            transition: 0.1s ease;
+            margin-top: 1rem;
+        }
+
+        .confirm-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 0 #a5222a, 0 12px 30px black;
+        }
+
+        .confirm-btn:active {
+            transform: translateY(7px);
+            box-shadow: 0 6px 0 #a5222a;
+        }
+
+        /* ===== RECEIPT ===== */
+        #receipt {
+            display: none;
+            margin: 2.5rem auto 0;
+            padding: 2.2rem 2.5rem;
+            background: #dcffdc;
+            border-radius: 3rem;
+            border-left: 18px solid #f3a13b;
+            box-shadow: 0 25px 35px #003d1f;
+            max-width: 600px;
+        }
+
+        #receipt h3 {
+            font-size: 2.8rem;
+            background: #ffe68f;
+            display: inline-block;
+            padding: 0.5rem 2.5rem;
+            border-radius: 4rem;
+            margin-top: 0;
+        }
+
+        #receipt h2 {
+            background: #b13e3e;
+            color: white;
+            padding: 0.8rem 2.5rem;
+            border-radius: 4rem;
+            font-size: 2.4rem;
+            display: inline-block;
+            margin: 1rem 0;
+            border: 3px solid #ffbb00;
+        }
+
+        #receipt button {
+            background: #1e791e;
+            color: white;
+            font-size: 1.4rem;
+            font-weight: bold;
+            padding: 1rem 2.5rem;
+            border-radius: 3rem;
+            border: none;
+            box-shadow: 0 7px 0 #0a3b0a;
+            cursor: pointer;
+            margin-top: 1.5rem;
+        }
+
+        #receipt button:hover {
+            background: #2b942b;
+            transform: translateY(-2px);
+            box-shadow: 0 9px 0 #0a3b0a;
+        }
+
+        /* ===== FOOTER with Hyderabad address ===== */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: #0b132b;
+            color: #ffecd6;
+            font-size: 1.3rem;
+            border-top: 6px solid #f3aa4b;
+            border-radius: 4rem 4rem 0 0;
+            margin-top: 2rem;
+        }
+
+        footer i {
+            margin: 0 8px;
+            color: #ffb85b;
+        }
+
+        .hyderabad-address {
+            font-weight: 600;
+            background: rgba(255,215,0,0.15);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 700px) {
+            .navbar { flex-direction: column; gap: 1rem; }
+            .nav-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+            header h1 { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+    <!-- Navigation Bar: Home, Menu, Contact, Order -->
+    <div class="navbar">
+        <div class="logo"><a href="#"><i class="fas fa-utensils"></i> DBites</a></div>
+        <div class="nav-links">
+            <a href="#"><i class="fas fa-home"></i> Home</a>
+            <a href="#menu"><i class="fas fa-book-open"></i> Menu</a>
+            <a href="#contact"><i class="fas fa-map-marker-alt"></i> Contact</a>
+            <a href="#order"><i class="fas fa-shopping-cart"></i> Order</a>
+        </div>
+    </div>
+
+    <header>
+        <h1><i class="fas fa-utensil-spoon"></i> Delicious Bites <i class="fas fa-utensil-fork"></i></h1>
+        <div class="hyderabad-badge">
+            <i class="fas fa-map-pin"></i> Jubilee Hills · Hyderabad · 500033
+        </div>
+        <p style="color: #ffd7a0; margin-top: 0.8rem; font-size: 1.3rem;">authentic flavours · since 2015</p>
+    </header>
+
+    <!-- MENU SECTION (19 items with Hyderabad-style prices) -->
+    <section id="menu">
+        <h2>✦ our signature menu ✦</h2>
+        <div class="menu-grid">
+            <!-- 1 Pizza - now ₹320 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=300&fit=crop" alt="pizza">
+                <p>Pizza</p><div class="price-tag">₹320</div>
+                <input type="number" id="pizza" value="0" min="0">
+            </div>
+            <!-- 2 Burger - now ₹180 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&h=300&fit=crop" alt="burger">
+                <p>Burger</p><div class="price-tag">₹180</div>
+                <input type="number" id="burger" value="0" min="0">
+            </div>
+            <!-- 3 Pasta - now ₹250 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400&h=300&fit=crop" alt="pasta">
+                <p>Pasta</p><div class="price-tag">₹250</div>
+                <input type="number" id="pasta" value="0" min="0">
+            </div>
+            <!-- 4 Steak - now ₹420 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=400&h=300&fit=crop" alt="steak">
+                <p>Steak</p><div class="price-tag">₹420</div>
+                <input type="number" id="steak" value="0" min="0">
+            </div>
+            <!-- 5 Fries - now ₹120 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=300&fit=crop" alt="fries">
+                <p>Fries</p><div class="price-tag">₹120</div>
+                <input type="number" id="fries" value="0" min="0">
+            </div>
+            <!-- 6 Sandwich - now ₹150 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&h=300&fit=crop" alt="sandwich">
+                <p>Sandwich</p><div class="price-tag">₹150</div>
+                <input type="number" id="sandwich" value="0" min="0">
+            </div>
+            <!-- 7 Noodles - now ₹210 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&h=300&fit=crop" alt="noodles">
+                <p>Noodles</p><div class="price-tag">₹210</div>
+                <input type="number" id="noodles" value="0" min="0">
+            </div>
+            <!-- 8 Salad - now ₹160 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop" alt="salad">
+                <p>Salad</p><div class="price-tag">₹160</div>
+                <input type="number" id="salad" value="0" min="0">
+            </div>
+            <!-- 9 Fried Rice - now ₹190 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400&h=300&fit=crop" alt="fried rice">
+                <p>Fried Rice</p><div class="price-tag">₹190</div>
+                <input type="number" id="friedRice" value="0" min="0">
+            </div>
+            <!-- 10 Fish - now ₹350 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400&h=300&fit=crop" alt="fish">
+                <p>Grilled Fish</p><div class="price-tag">₹350</div>
+                <input type="number" id="fish" value="0" min="0">
+            </div>
+            <!-- 11 Cake - now ₹170 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop" alt="cake">
+                <p>Cake</p><div class="price-tag">₹170</div>
+                <input type="number" id="cake" value="0" min="0">
+            </div>
+            <!-- 12 Pancake - now ₹140 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=400&h=300&fit=crop" alt="pancake">
+                <p>Pancake</p><div class="price-tag">₹140</div>
+                <input type="number" id="pancake" value="0" min="0">
+            </div>
+            <!-- 13 Mojito - now ₹110 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=400&h=300&fit=crop" alt="mojito">
+                <p>Mojito</p><div class="price-tag">₹110</div>
+                <input type="number" id="mojito" value="0" min="0">
+            </div>
+            <!-- 14 Sushi - now ₹380 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?w=400&h=300&fit=crop" alt="sushi">
+                <p>Sushi</p><div class="price-tag">₹380</div>
+                <input type="number" id="sushi" value="0" min="0">
+            </div>
+            <!-- 15 Tacos - now ₹210 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?w=400&h=300&fit=crop" alt="tacos">
+                <p>Tacos</p><div class="price-tag">₹210</div>
+                <input type="number" id="tacos" value="0" min="0">
+            </div>
+            <!-- 16 Donut - now ₹95 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400&h=300&fit=crop" alt="donut">
+                <p>Donut</p><div class="price-tag">₹95</div>
+                <input type="number" id="donut" value="0" min="0">
+            </div>
+            <!-- 17 Curry - now ₹280 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&h=300&fit=crop" alt="curry">
+                <p>Curry</p><div class="price-tag">₹280</div>
+                <input type="number" id="curry" value="0" min="0">
+            </div>
+            <!-- 18 Burrito - now ₹240 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400&h=300&fit=crop" alt="burrito">
+                <p>Burrito</p><div class="price-tag">₹240</div>
+                <input type="number" id="burrito" value="0" min="0">
+            </div>
+            <!-- 19 Waffles - now ₹170 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1562376552-0d160a2f238d?w=400&h=300&fit=crop" alt="waffles">
+                <p>Waffles</p><div class="price-tag">₹170</div>
+                <input type="number" id="waffles" value="0" min="0">
+            </div>
+        </div>
+    </section>
+
+    <!-- ORDER / BOOKING SECTION (id="order" for navigation) -->
+    <section id="order">
+        <h2>✨ reserve / order online ✨</h2>
+        <div class="booking-panel">
+            <div class="form-group">
+                <label><i class="fas fa-user"></i> your name</label>
+                <input type="text" id="name" placeholder="e.g. Vikram" required>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-calendar-alt"></i> date</label>
+                <input type="date" id="date" required>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-clock"></i> time</label>
+                <input type="time" id="time" required>
+            </div>
+            <button class="confirm-btn" onclick="return calculateBill()"><i class="fas fa-check-circle"></i> confirm order</button>
+        </div>
+
+        <div id="receipt"></div>
+    </section>
+
+    <!-- CONTACT FOOTER (id="contact" + Hyderabad address) -->
+    <footer id="contact">
+        <div style="font-size: 1.6rem; margin-bottom: 0.5rem;">🇮🇳 <i class="fas fa-map-marked-alt"></i> Hyderabad</div>
+        <div class="hyderabad-address">
+            <i class="fas fa-store"></i> Road No. 36, Jubilee Hills, Hyderabad · 500033
+        </div>
+        <div style="margin-top: 1rem;">
+            <i class="fas fa-phone-alt"></i> +91 98765 43210  |  <i class="fas fa-envelope"></i> hello@dbites.in
+        </div>
+        <div style="margin-top: 1.2rem; opacity: 0.9;">
+            <i class="fas fa-clock"></i> 11:00 AM – 11:30 PM (last order 10:45)
+        </div>
+        <div style="margin-top: 2rem; font-size: 1rem;">
+            © 2025 Delicious Bites · taste of the town
+        </div>
+    </footer>
+</div>
+
+<script>
+function calculateBill() {
+    // prices for 19 items in Indian Rupees (Hyderabad street-friendly rates)
+    const prices = {
+        pizza: 320, burger: 180, pasta: 250, steak: 420, fries: 120,
+        sandwich: 150, noodles: 210, salad: 160, friedRice: 190, fish: 350,
+        cake: 170, pancake: 140, mojito: 110, sushi: 380, tacos: 210,
+        donut: 95, curry: 280, burrito: 240, waffles: 170
+    };
+
+    let total = 0;
+    let details = '';
+
+    for (let item in prices) {
+        let qty = document.getElementById(item)?.value;
+        if (qty) {
+            qty = parseInt(qty, 10);
+            if (!isNaN(qty) && qty > 0) {
+                total += prices[item] * qty;
+                // format item name nicely
+                let displayName = item === 'friedRice' ? 'FRIED RICE' : 
+                                 item === 'mojito' ? 'MOJITO' : item.toUpperCase();
+                details += `🍽️ ${displayName}  x ${qty}<br>`;
+            }
+        }
+    }
+
+    let name = document.getElementById('name').value.trim();
+    let date = document.getElementById('date').value;
+    let time = document.getElementById('time').value;
+
+    if (!name || !date || !time) {
+        alert('❗ please fill all booking details');
+        return false;
+    }
+    if (total === 0) {
+        alert('❗ please select at least one item');
+        return false;
+    }
+
+    let receiptDiv = document.getElementById('receipt');
+    receiptDiv.style.display = 'block';
+    receiptDiv.innerHTML = `
+        <h3><i class="fas fa-receipt"></i> your receipt</h3>
+        <div style="background:#fffef7; border-radius:2.5rem; padding:2rem; border:4px solid #feb4b4;">
+            <p style="font-size:1.3rem;"><b>👤 ${name}</b>  ·  📅 ${date}  ·  ⏱️ ${time}</p>
+            <p><b>🍕 ordered items:</b></p>
+            <p>${details}</p>
+            <h2>💰 ₹${total}</h2>
+            <p style="color:#006600; font-weight:800;">✅ confirmed · we'll be ready</p>
+        </div>
+        <button onclick="window.print()"><i class="fas fa-print"></i> print receipt</button>
+    `;
+    return false;
+}
+</script>
+<!-- font awesome for receipt icons -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+</body>
+</html>
